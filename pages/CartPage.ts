@@ -76,4 +76,8 @@ export class CartPage {
         await removeButton.click();
         return this;
     }
+
+    async getItemCount(): Promise<number> {
+        return await this.itemsBox.count();
+    }
 }

@@ -83,5 +83,7 @@ export class CheckoutPage {
         }
 
         return this;
-    }    
+    }
+
+    async clickContinueButton(): Promise<
 }

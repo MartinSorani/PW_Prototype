@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { HomePage } from './HomePage';
 
 export class LoginPage {
     readonly page: Page;
@@ -37,10 +38,11 @@ export class LoginPage {
         await this.page.goto('/');
     }
 
-    async enterCredentials(username: string, password: string) {
+    async enterCredentials(username: string, password: string): Promise<HomePage> {
         await this.userNameInput.fill(username);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
+        return new HomePage(this.page);
     }
 
     async closeErrorMessage() {

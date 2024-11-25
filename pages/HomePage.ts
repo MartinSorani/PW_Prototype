@@ -1,5 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 import { Sidebar } from './Sidebar';
+import { CartPage } from './CartPage';
 
 export class HomePage {
     readonly page: Page;
@@ -28,7 +29,7 @@ export class HomePage {
         return this.page.locator('div[data-test="inventory-item-name"]');
     }
 
-    get carButton(): Locator {
+    get cartButton(): Locator {
         return this.page.locator('#shopping_cart_container');
     }
 
@@ -53,7 +54,7 @@ export class HomePage {
         await this.page.goto('/app.html');
     }
 
-    async verifyOnPage(): Promise<void> {
+    async verifyOnPage(): Promise<this> {
         if (!(await this.pageTitle().isVisible())) {
             throw new Error('Title element is not visible on the page.');
         }
@@ -62,6 +63,7 @@ export class HomePage {
         if (!titleText?.includes(this.expectedTitle)) {
             throw new Error(`Unexpected title text: "${titleText}". Expected text to include "${this.expectedTitle}".`);
         }
+        return this;
     }
 
     async selectSorting(value: string): Promise<this> {
@@ -95,5 +97,10 @@ export class HomePage {
 
     async removeItemFromCart(itemName: string): Promise<this> {
         return this.clickItemButton(itemName, 'remove');
+    }
+
+    async clickCartButton(): Promise<CartPage> {
+        this.cartButton.click();
+        return new CartPage(this.page);
     }
 }
