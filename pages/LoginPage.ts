@@ -35,14 +35,14 @@ export class LoginPage {
 
     // Actions
     async navigate(): Promise<this> {
-        this.page.goto('/');
+        await this.page.goto('/');
         return this;
     }
 
     async enterCredentials(username: string, password: string): Promise<HomePage> {
-        this.userNameInput.fill(username);
-        this.passwordInput.fill(password);
-        this.loginButton.click();
+        await this.userNameInput.fill(username);
+        await this.passwordInput.fill(password);
+        await this.loginButton.click();
         return new HomePage(this.page);
     }
 
