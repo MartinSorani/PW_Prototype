@@ -1,6 +1,7 @@
 import { Page, Locator } from '@playwright/test';
 import { Sidebar } from './Sidebar';
 import { CartPage } from './CartPage';
+import { CheckoutOverviewPage } from './CheckoutOverviewPage';
 
 export class CheckoutPage {
     readonly page: Page;
@@ -85,5 +86,8 @@ export class CheckoutPage {
         return this;
     }
 
-    async clickContinueButton(): Promise<
+    async clickContinueButton(): Promise<CheckoutOverviewPage> {
+        await this.clickContinueButton();
+        return new CheckoutOverviewPage(this.page);
+    }
 }

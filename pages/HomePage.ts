@@ -50,8 +50,9 @@ export class HomePage {
 
 
     // Actions
-    async navigate() {
+    async navigate(): Promise<this> {
         await this.page.goto('/app.html');
+        return this;
     }
 
     async verifyOnPage(): Promise<this> {
